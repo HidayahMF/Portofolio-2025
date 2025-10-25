@@ -1,0 +1,29 @@
+.scroll-row {
+  display: flex;
+  animation: scroll-left 8s linear infinite;
+  -webkit-animation: scroll-left 8s linear infinite;
+}
+
+.scroll-row-reverse {
+  display: flex;
+  animation: scroll-right 8s linear infinite;
+  -webkit-animation: scroll-right 8s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
