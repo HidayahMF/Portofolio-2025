@@ -33,6 +33,13 @@ const projects = [
     link: "",
   },
   {
+    title: "OutGamble",
+    desc: "Out Gamble hadir sebagai platform edukatif yang membantu pelajar dan masyarakat memahami bahaya judi online. Melalui informasi, tips, dan solusi digital yang interaktif, kami berkomitmen membangun generasi sadar dan bebas dari kecanduan judi.",
+    tech: ["React.js", "Laravel", "Tailwind CSS"],
+    img: "/images/OutGamble.png",
+    link: "",
+  },
+  {
     title: "Web Sekolah SMKN 26 Jakarta",
     desc: "Website resmi SMKN 26 Jakarta yang menampilkan profil sekolah, visi misi, berita, serta informasi akademik secara interaktif dan responsif. Dibangun menggunakan React.js dan CSS Vanilla untuk tampilan yang ringan dan modern, serta MongoDB untuk pengelolaan data dinamis seperti berita dan pengumuman sekolah.",
     tech: ["React.js", "CSS Vanilla", "Express", "MongoDB"],
@@ -45,7 +52,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-10 lg:px-20 py-20 bg-gradient-to-b from-[#0f1624] to-[#1a2332] text-white"
+      className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-10 lg:px-20 py-20 bg-linear-to-b from-[#0f1624] to-[#1a2332] text-white"
     >
       <motion.h2
         className="text-3xl sm:text-4xl font-bold mb-12 text-green-400 text-center"

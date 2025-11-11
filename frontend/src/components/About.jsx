@@ -37,7 +37,7 @@ const About = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-20 text-center bg-gradient-to-b from-[#0f1624] to-[#1a2332] text-white">
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-20 text-center bg-linear-to-b from-[#0f1624] to-[#1a2332] text-white">
  
       <motion.img
         src="/images/profile.jpg"
