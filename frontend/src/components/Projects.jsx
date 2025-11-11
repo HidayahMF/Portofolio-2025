@@ -35,7 +35,7 @@ const projects = [
   {
     title: "Web Sekolah SMKN 26 Jakarta",
     desc: "Website resmi SMKN 26 Jakarta yang menampilkan profil sekolah, visi misi, berita, serta informasi akademik secara interaktif dan responsif. Dibangun menggunakan React.js dan CSS Vanilla untuk tampilan yang ringan dan modern, serta MongoDB untuk pengelolaan data dinamis seperti berita dan pengumuman sekolah.",
-    tech: ["React.js", "CSS Vanilla", "MongoDB"],
+    tech: ["React.js", "CSS Vanilla", "Express", "MongoDB"],
     img: "/images/smkn26.png",
     link: "",
   },
@@ -68,7 +68,6 @@ const Projects = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-           
             <motion.img
               src={p.img}
               alt={p.title}
@@ -83,7 +82,6 @@ const Projects = () => {
                 {p.desc}
               </p>
 
-             
               <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-6">
                 {p.tech.map((t, j) => (
                   <span
