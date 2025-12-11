@@ -46,6 +46,13 @@ const projects = [
     img: "/images/smkn26.png",
     link: "",
   },
+  {
+    title: "Player Team Generator Web API",
+    desc: "RESTful API untuk mengelola data pemain sepak bola dan membentuk tim secara otomatis berdasarkan posisi dan skill utama. Dibangun menggunakan Laravel dengan validasi data, autentikasi token, serta fitur CRUD dan algoritma seleksi tim.",
+    tech: ["Laravel", "PHP", "MySQL", "REST API"],
+    img: "",
+    link: "https://github.com/HidayahMF/RestFullPlayerApi",
+  },
 ];
 
 const Projects = () => {
