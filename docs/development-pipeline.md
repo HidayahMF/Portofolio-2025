@@ -1,123 +1,149 @@
-# Portofolio-2025 — Development Pipeline
+# 🧑‍💻 Portofolio-2025 — Engineering Blueprint
 
-> Code-grounded architecture and delivery guide for the current repository snapshot. Reviewed from `main` at `9e42aab2635c` on 2026-09-17.
+> **Personal portfolio delivery map:** React owns the visible experience today; Laravel remains a separate scaffold and should not be described as an active CMS yet.
 
-This repository contains a React portfolio frontend and a separate Laravel scaffold. The visible portfolio content is currently driven by frontend source rather than a working CMS/backend integration.
+**Reviewed snapshot:** `main` @ [`9e42aab2635c`](https://github.com/HidayahMF/Portofolio-2025/commit/9e42aab2635cae653ec43485910abec0925c7027) — 2026-09-17
 
-## 1. Current architecture
+## ⚡ Project pulse
+
+| Area | Current implementation |
+| --- | --- |
+| Visitor UI | React + Vite |
+| Portfolio content | Local frontend source |
+| Backend | Laravel scaffold |
+| CMS integration | Not established |
+| Automated CI | No `.github/workflows/` found |
+
+## 🏗️ Experience architecture
 
 ```mermaid
 flowchart LR
-    V[Visitor] --> R[React App]
-    R --> ABOUT[About]
-    R --> SKILL[Skills]
-    R --> PROJECT[Projects]
-    R --> WEB[Websites]
-    R --> CONTACT[Contact]
+    V[Visitor] --> APP[React App]
 
-    L[Laravel Scaffold] -. not currently driving portfolio content .-> R
+    subgraph PAGE[Single-page portfolio]
+      A[About]
+      S[Skills]
+      P[Projects]
+      W[Websites]
+      C[Contact]
+    end
+
+    APP --> A
+    APP --> S
+    APP --> P
+    APP --> W
+    APP --> C
+
+    L[Laravel Scaffold] -. not currently feeding portfolio data .-> APP
 ```
 
-## 2. Portfolio rendering flow
+## 🧭 Content rendering flow
 
 ```mermaid
 flowchart TD
-    APP[App.jsx] --> ABOUT[About Section]
-    APP --> SKILLS[Skills Section]
-    APP --> PROJECTS[Projects Section]
-    APP --> WEBSITES[Websites Section]
-    APP --> CONTACT[Contact Section]
+    APP[App.jsx] --> SECTIONS[Page sections]
+    SECTIONS --> PROJECTS[Projects.jsx]
     PROJECTS --> DATA[Local project definitions]
-    DATA --> CARDS[Rendered project cards]
+    DATA --> CARD[Project cards]
+    CARD --> LINKS[External project links]
 ```
 
-## 3. Current backend status
+The visible portfolio is therefore **frontend-owned** in the reviewed source.
+
+## 🗺️ Code ownership map
+
+| Source | Responsibility | Status |
+| --- | --- | --- |
+| [`frontend/src/App.jsx`](https://github.com/HidayahMF/Portofolio-2025/blob/9e42aab2635cae653ec43485910abec0925c7027/frontend/src/App.jsx) | Main page composition | Active |
+| [`frontend/src/components/Projects.jsx`](https://github.com/HidayahMF/Portofolio-2025/blob/9e42aab2635cae653ec43485910abec0925c7027/frontend/src/components/Projects.jsx) | Project content/cards | Active |
+| [`backend/routes/web.php`](https://github.com/HidayahMF/Portofolio-2025/blob/9e42aab2635cae653ec43485910abec0925c7027/backend/routes/web.php) | Laravel web route | Welcome scaffold |
+| [`PortfolioController.php`](https://github.com/HidayahMF/Portofolio-2025/blob/9e42aab2635cae653ec43485910abec0925c7027/backend/app/Http/Controllers/Admin/PortfolioController.php) | Potential future dynamic portfolio logic | Methods empty |
+
+## ✍️ Content update pipeline
 
 ```mermaid
 flowchart LR
-    ROUTE[backend/routes/web.php] --> WELCOME[Welcome View]
-    CTRL[PortfolioController] --> EMPTY[Methods currently empty]
-    EMPTY -. no established CMS/data flow .-> FRONTEND[React Portfolio]
+    A[Project/profile change] --> B[Update React source]
+    B --> C[Verify copy]
+    C --> D[Verify links + images]
+    D --> E[Responsive preview]
+    E --> F[Lint]
+    F --> G[Production build]
+    G --> H[Review]
+    H --> I[Deploy]
 ```
 
-## 4. Runtime ownership
-
-| Layer | Responsibility | Key source |
-| --- | --- | --- |
-| React app | Main page composition | `frontend/src/App.jsx` |
-| Projects component | Visible project cards/content | `frontend/src/components/Projects.jsx` |
-| Laravel routes | Current backend web route | `backend/routes/web.php` |
-| Portfolio controller | Backend scaffold for future dynamic content | `PortfolioController.php` |
-
-## 5. Development pipeline
-
-```mermaid
-flowchart LR
-    SRC[Pull source] --> FE[Install frontend deps]
-    SRC --> BE[Install backend deps if needed]
-    FE --> DEV[Run React/Vite]
-    DEV --> CONTENT[Edit portfolio content]
-    CONTENT --> LINT[Lint]
-    LINT --> BUILD[Production build]
-    BUILD --> PREVIEW[Preview]
-    PREVIEW --> REVIEW[Review]
-```
-
-| Directory | Command | Purpose |
-| --- | --- | --- |
-| `frontend` | `npm run dev` | Portfolio dev server |
-| `frontend` | `npm run build` | Portfolio production build |
-| `frontend` | `npm run lint` | Frontend lint |
-| `backend` | `composer dev` | Laravel dev stack |
-| `backend` | `composer test` | Laravel tests |
-| `backend` | `npm run build` | Laravel-side Vite build |
-
-## 6. Content update pipeline
+## 🚀 Engineering pipeline
 
 ```mermaid
 flowchart TD
-    CHANGE[Project / Profile Change] --> SOURCE[Update React Source]
-    SOURCE --> LINKS[Verify links/images]
-    LINKS --> MOBILE[Check responsive layout]
-    MOBILE --> BUILD[Build]
-    BUILD --> DEPLOY[Deploy static frontend]
+    CHANGE[Change request] --> OWNER{Which layer owns it?}
+    OWNER -->|Visible portfolio| FE[React]
+    OWNER -->|Future dynamic backend| BE[Laravel]
+
+    FE --> FECHECK[Lint + build + browser smoke]
+    BE --> BETEST[Laravel tests]
+
+    FECHECK --> REVIEW[PR review]
+    BETEST --> REVIEW
+    REVIEW --> RELEASE[Target deployment]
 ```
 
-## 7. Verification gates
+### Declared commands
 
-- Every navigation anchor lands on the correct section.
-- Every external project/contact link is valid.
-- Images have usable fallbacks/alt text.
-- Project descriptions match what is actually implemented.
-- Mobile/tablet breakpoints remain readable.
-- Static build completes successfully.
-- Laravel example tests are not counted as portfolio feature coverage.
+| Area | Commands |
+| --- | --- |
+| React frontend | `npm run dev`, `npm run lint`, `npm run build` |
+| Laravel scaffold | `composer dev`, `composer test`, `npm run build` |
 
-## 8. Release pipeline
+## 🛡️ Quality gates
+
+| Gate | Pass condition |
+| --- | --- |
+| Navigation | Every anchor reaches the intended section |
+| Project integrity | Descriptions match implemented work |
+| External links | Project/contact URLs resolve correctly |
+| Assets | Images render with useful fallbacks / alt text |
+| Responsive UI | Desktop + mobile remain readable |
+| Build | Frontend production build completes |
+| Backend claims | Laravel is not presented as an active CMS until it actually drives content |
+
+## ⚠️ Risk radar
+
+| Priority | Finding | Why it matters |
+| --- | --- | --- |
+| 🟠 Medium | `PortfolioController` methods are empty | Backend functionality can be overstated easily |
+| 🟠 Medium | Laravel route still serves welcome content | Backend is not the portfolio runtime shown to visitors |
+| 🟡 Low | Root `npm run test` is a placeholder | It should not be counted as real automated coverage |
+| 🟡 Low | Portfolio data lives in source | Every content change currently requires a code change |
+
+## 🌐 Release path
 
 ```mermaid
 flowchart LR
     PR[Reviewed PR] --> LINT[Lint]
     LINT --> BUILD[Frontend build]
-    BUILD --> LINKS[Link/image smoke test]
-    LINKS --> RESPONSIVE[Responsive preview]
-    RESPONSIVE --> DEPLOY[Static deployment]
+    BUILD --> PREVIEW[Desktop + mobile preview]
+    PREVIEW --> LINKS[Link / asset smoke test]
+    LINKS --> DEPLOY[Static deployment]
+    DEPLOY --> CHECK[Post-deploy check]
 ```
 
-No GitHub Actions workflow was found in the reviewed snapshot.
+No GitHub Actions workflow was found in the reviewed snapshot, so this remains a documented manual release path unless CI is added later.
 
-## 9. Known gaps
+## 📌 Evolution path
 
-1. `PortfolioController` methods are empty.
-2. `backend/routes/web.php` currently serves the Laravel welcome view.
-3. A working frontend-to-backend portfolio CMS flow is not established by the reviewed source.
-4. Root-level `npm run test` is a placeholder and should not be treated as real coverage.
+```mermaid
+flowchart LR
+    NOW[Frontend-owned content] --> OPTION{Need non-code content editing?}
+    OPTION -->|No| KEEP[Keep portfolio static]
+    OPTION -->|Yes| CMS[Implement real backend/CMS contract]
+    CMS --> API[Expose portfolio API]
+    API --> FRONTEND[React consumes dynamic data]
+```
 
-## 10. Source map
+---
 
-- [`frontend/src/App.jsx`](https://github.com/HidayahMF/Portofolio-2025/blob/9e42aab2635cae653ec43485910abec0925c7027/frontend/src/App.jsx)
-- [`frontend/src/components/Projects.jsx`](https://github.com/HidayahMF/Portofolio-2025/blob/9e42aab2635cae653ec43485910abec0925c7027/frontend/src/components/Projects.jsx)
-- [`backend/routes/web.php`](https://github.com/HidayahMF/Portofolio-2025/blob/9e42aab2635cae653ec43485910abec0925c7027/backend/routes/web.php)
-- [`backend/app/Http/Controllers/Admin/PortfolioController.php`](https://github.com/HidayahMF/Portofolio-2025/blob/9e42aab2635cae653ec43485910abec0925c7027/backend/app/Http/Controllers/Admin/PortfolioController.php)
+### Keeping this blueprint accurate
 
-Keep this guide synchronized with portfolio content ownership and any future CMS/backend integration.
+Update the diagrams whenever content ownership changes. The moment Laravel starts serving real portfolio data, replace the dotted scaffold relationship with the actual request/data flow.
